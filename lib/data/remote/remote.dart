@@ -1,0 +1,1 @@
+class RemoteSource implements RemoteSourceBase {}
