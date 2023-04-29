@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../logic/cubit/app_service_cubit.dart';
+import '../../../logic/app_service/app_service_cubit.dart';
 
 class StartButton extends StatelessWidget {
   const StartButton({super.key});
