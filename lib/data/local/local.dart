@@ -1,7 +1,10 @@
+import 'package:ayat_notifications/data/models/ayah.dart';
 import 'package:ayat_notifications/data/models/quran_response.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:http/http.dart';
 
 import '../models/surah.dart';
+import '../models/type.dart';
 import 'base/base.dart';
 
 class LocalDatabase implements LocalDatabaseBase {
@@ -23,19 +26,26 @@ class LocalDatabase implements LocalDatabaseBase {
 
   @override
   dynamic get(String key) {
-    return Hive.box('surahs').get(key);
+    final box = Hive.box<Surah>('surahs');
+
+    return box.get(key);
   }
 
   @override
   Future<void> init() async {
     await Hive.initFlutter();
-    // Hive.registerAdapter<Surah>(adapter);
+
+    Hive.registerAdapter(SurahAdapter());
+    Hive.registerAdapter(AyahAdapter());
+    Hive.registerAdapter(RevelationTypeAdapter());
+
     await Hive.openBox<Surah>('surahs');
   }
 
   @override
-  Future<void> save(String key, value) {
-    return Hive.box('surahs').put(key, value);
+  Future<void> save(String key, Surah value) async {
+    final box = Hive.box<Surah>('surahs');
+    await box.add(value);
   }
 
   @override
@@ -53,4 +63,14 @@ class LocalDatabase implements LocalDatabaseBase {
 
   static final _instance = LocalDatabase._();
   LocalDatabase._();
+
+  bool isSurahsAlreadySaved() {
+    final box = Hive.box<Surah>('surahs');
+    assert(
+      box.values.length == 114,
+      'Surahs are not saved, check your code, found only ${box.values.length} surahs',
+    );
+
+    return box.isNotEmpty;
+  }
 }

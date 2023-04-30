@@ -24,12 +24,6 @@ class QuranResponse {
         status: json["status"],
         data: Data.fromMap(json["data"]),
       );
-
-  Map<String, dynamic> toMap() => {
-        "code": code,
-        "status": status,
-        "data": data.toMap(),
-      };
 }
 
 class Data {
@@ -45,9 +39,4 @@ class Data {
         surahs: List<Surah>.from(json["surahs"].map((x) => Surah.fromMap(x))),
         edition: Edition.fromMap(json["edition"]),
       );
-
-  Map<String, dynamic> toMap() => {
-        "surahs": List<dynamic>.from(surahs.map((x) => x.toMap())),
-        "edition": edition.toMap(),
-      };
 }

@@ -14,6 +14,11 @@ class AyatFetcherCubit extends Cubit<AyatFetcherState> {
   }
 
   Future<void> _handleFetching() async {
+    final isSurahsAlreadySaved = LocalDatabase.instance.isSurahsAlreadySaved();
+    if (isSurahsAlreadySaved) {
+      return;
+    }
+
     try {
       final quranResponse = await RemoteSource.instance.fetchAyat();
       LocalDatabase.instance.saveQuranResponse(quranResponse);

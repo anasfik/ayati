@@ -4,7 +4,7 @@ import '../../models/surah.dart';
 
 abstract class LocalDatabaseBase {
   Future<void> init();
-  Future save(String key, dynamic value);
+  Future save(String key, Surah value);
   Future saveSurah(String key, Surah value);
   dynamic get(String key);
   Future<void> delete(String key);
