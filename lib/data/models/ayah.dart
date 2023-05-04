@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 part 'ayah.g.dart';
 
 @HiveType(typeId: 1)
-class Ayah {
+class Ayah extends Equatable {
   @HiveField(0)
   final int number;
 
@@ -65,4 +66,17 @@ class Ayah {
         "hizbQuarter": hizbQuarter,
         "sajda": sajda,
       };
+
+  @override
+  List<Object?> get props => [
+        number,
+        text,
+        numberInSurah,
+        juz,
+        manzil,
+        page,
+        ruku,
+        hizbQuarter,
+        sajda,
+      ];
 }

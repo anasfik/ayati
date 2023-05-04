@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 import 'ayah.dart';
@@ -6,7 +7,7 @@ import 'type.dart';
 part 'surah.g.dart';
 
 @HiveType(typeId: 0)
-class Surah {
+class Surah extends Equatable {
   @HiveField(0)
   final int number;
   @HiveField(1)
@@ -46,4 +47,14 @@ class Surah {
         "revelationType": revelationTypeValues.reverse[revelationType],
         "ayahs": List<dynamic>.from(ayahs.map((x) => x.toMap())),
       };
+
+  @override
+  List<Object?> get props => [
+        number,
+        name,
+        englishName,
+        englishNameTranslation,
+        revelationType,
+        ayahs,
+      ];
 }
