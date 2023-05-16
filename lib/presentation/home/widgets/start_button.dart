@@ -1,3 +1,4 @@
+import 'package:ayat_notifications/presentation/general/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,15 +9,11 @@ class StartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.75,
-      height: 50,
-      child: ElevatedButton(
-        onPressed: () {
-          context.read<AppServiceCubit>().startService();
-        },
-        child: const Text('Start Service'),
-      ),
+    return AyatiButton(
+      onTap: () {
+        context.read<AppServiceCubit>().startService();
+      },
+      text: 'Start Service',
     );
   }
 }
