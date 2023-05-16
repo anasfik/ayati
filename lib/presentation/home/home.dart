@@ -9,6 +9,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const height = 10.0;
+
     return BlocConsumer<AyatFetcherCubit, AyatFetcherState>(
       listener: (context, state) {
         if (state.error != null) {
@@ -25,7 +27,17 @@ class HomeView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const <Widget>[
+                SizedBox(height: height * 2),
+                Spacer(),
+                SizedBox(
+                  width: 100.0,
+                  child: Placeholder(
+                    fallbackHeight: 100.0,
+                  ),
+                ),
+                Spacer(),
                 StartButton(),
+                SizedBox(height: height * 2),
               ],
             ),
           ),

@@ -15,7 +15,7 @@ class StartButton extends StatelessWidget {
         onPressed: () {
           context.read<AppServiceCubit>().startService();
         },
-        child: const Text('Start'),
+        child: const Text('Start Service'),
       ),
     );
   }
