@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'main_service.dart';
+import 'widgets/app_bar.dart';
 import 'widgets/logo.dart';
 import 'widgets/start_button.dart';
 
@@ -23,6 +24,7 @@ class HomeView extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
+          appBar: const HomeAppBar(),
           body: SizedBox(
             width: double.infinity,
             child: Column(

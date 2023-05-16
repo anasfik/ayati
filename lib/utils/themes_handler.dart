@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 abstract class ThemesHandler {
   static final light = ThemeData.from(
@@ -7,5 +8,5 @@ abstract class ThemesHandler {
       secondary: Colors.greenAccent,
     ),
     useMaterial3: true,
-  );
+  ).copyWith(textTheme: GoogleFonts.amiriTextTheme());
 }

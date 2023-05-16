@@ -15,6 +15,8 @@ final ayatFetcherCubit = AyatFetcherCubit();
 final appCubit = AppServiceCubit(fetcherCubit: ayatFetcherCubit);
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await LocalDatabase.instance.init(clearOn: false);
 
   AppServiceCubit.init();

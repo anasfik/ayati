@@ -97,4 +97,12 @@ class NotificationController {
       debug: kDebugMode,
     );
   }
+
+  static Future<void> cancelService() {
+    return AwesomeNotifications().cancelAll();
+  }
+
+  static Future<void> dismissAllNotification() {
+    return AwesomeNotifications().dismissAllNotifications();
+  }
 }
