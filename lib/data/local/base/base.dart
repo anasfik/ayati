@@ -3,7 +3,9 @@ import 'package:ayat_notifications/data/models/quran_response.dart';
 import '../../models/surah.dart';
 
 abstract class LocalDatabaseBase {
-  Future<void> init();
+  Future<void> init({
+    required bool clearOn,
+  });
   Future save(String key, Surah value);
   Future saveSurah(String key, Surah value);
   dynamic get(String key);

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:ui';
 
@@ -9,10 +10,26 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+import '../ayat_fetcher/ayat_fetcher_cubit.dart';
+
 part 'app_service_state.dart';
 
 class AppServiceCubit extends Cubit<AppServiceState> {
-  AppServiceCubit() : super(AppServiceInitial());
+  final AyatFetcherCubit fetcherCubit;
+  StreamSubscription? fetcherCubitSubscription;
+  AppServiceCubit({
+    required this.fetcherCubit,
+  }) : super(
+          AppServiceInitial(fetcherState: fetcherCubit.state),
+        ) {
+    _listenToFetcherCubit();
+  }
+
+  @override
+  Future<void> close() async {
+    fetcherCubitSubscription!.cancel();
+    return super.close();
+  }
 
   void startService() async {
     final isNotificationAllowed =
@@ -89,6 +106,12 @@ class AppServiceCubit extends Cubit<AppServiceState> {
       ],
       debug: kDebugMode,
     );
+  }
+
+  void _listenToFetcherCubit() {
+    fetcherCubitSubscription = fetcherCubit.stream.listen((fetcherState) {
+      emit(state.copyWith(fetcherState: fetcherState));
+    });
   }
 }
 

@@ -10,8 +10,11 @@ import 'base/base.dart';
 class LocalDatabase implements LocalDatabaseBase {
   static LocalDatabase get instance => _instance;
   @override
-  Future<void> clear() {
-    return Hive.box('surahs').clear();
+  Future<void> clear() async {
+    await Future.wait([
+      Hive.box<Surah>('surahs').clear(),
+      Hive.box<Ayah>('ayahs').clear(),
+    ]);
   }
 
   @override
@@ -32,7 +35,9 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   @override
-  Future<void> init() async {
+  Future<void> init({
+    required bool clearOn,
+  }) async {
     await Hive.initFlutter();
 
     Hive.registerAdapter(SurahAdapter());
@@ -41,6 +46,9 @@ class LocalDatabase implements LocalDatabaseBase {
 
     await Hive.openBox<Surah>('surahs');
     await Hive.openBox<Ayah>('ayahs');
+    if (clearOn) {
+      await clear();
+    }
   }
 
   @override
@@ -67,10 +75,6 @@ class LocalDatabase implements LocalDatabaseBase {
 
   bool isSurahsAlreadySaved() {
     final box = Hive.box<Surah>('surahs');
-    assert(
-      box.values.length == 114,
-      'Surahs are not saved, check your code, found only ${box.values.length} surahs',
-    );
 
     return box.isNotEmpty;
   }

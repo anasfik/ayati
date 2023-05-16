@@ -2,6 +2,8 @@ import 'package:ayat_notifications/logic/ayat_fetcher/ayat_fetcher_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'main_service.dart';
+import 'widgets/logo.dart';
 import 'widgets/start_button.dart';
 
 class HomeView extends StatelessWidget {
@@ -29,14 +31,9 @@ class HomeView extends StatelessWidget {
               children: const <Widget>[
                 SizedBox(height: height * 2),
                 Spacer(),
-                SizedBox(
-                  width: 100.0,
-                  child: Placeholder(
-                    fallbackHeight: 100.0,
-                  ),
-                ),
+                AppLogo(),
                 Spacer(),
-                StartButton(),
+                MainServiceSection(),
                 SizedBox(height: height * 2),
               ],
             ),

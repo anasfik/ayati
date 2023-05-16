@@ -17,15 +17,20 @@ class RemoteSource implements RemoteSourceBase {
   Future<QuranResponse> _fetchAyat(dynamic _) async {
     try {
       final response = await http.get(
-        Uri.parse('http://api.alquran.cloud/v1/quran/ar.asad'),
-      );
+          Uri.parse(
+            'http://api.alquran.cloud/v1/quran/ar.asad',
+          ),
+          headers: {
+            'Connection': 'Keep-Alive',
+          });
       if (response.isOk) {
         return quranResponseFromMap(response.body);
       } else {
-        throw FetchException('Failed to load ayat');
+        throw FetchException(
+            "Error while fetching data: ${response.statusCode}");
       }
     } catch (e) {
-      throw FetchException('Failed to load ayat');
+      throw FetchException("${e.runtimeType}: ${e.toString()}");
     }
   }
 
