@@ -48,6 +48,8 @@ class LocalDatabase implements LocalDatabaseBase {
     await Hive.openBox<Ayah>('ayahs');
     if (clearOn) {
       await clear();
+      assert(Hive.box<Surah>('surahs').isEmpty);
+      assert(Hive.box<Ayah>('ayahs').isEmpty);
     }
   }
 

@@ -13,13 +13,13 @@ class MainServiceSection extends StatelessWidget {
     return BlocBuilder<AppServiceCubit, AppServiceState>(
       builder: (context, state) {
         if (state.fetcherState.isLoadingForAyat) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state.fetcherState.areAyahsSavedForLaterUse) {
-          return StartButton();
+          return const StartButton();
         } else if (state.fetcherState.error != null) {
           return Center(child: Text(state.fetcherState.error!));
         } else {
-          return LoadAyahsButton();
+          return const LoadAyahsButton();
         }
       },
     );

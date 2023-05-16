@@ -15,7 +15,7 @@ final ayatFetcherCubit = AyatFetcherCubit();
 final appCubit = AppServiceCubit(fetcherCubit: ayatFetcherCubit);
 
 void main() async {
-  await LocalDatabase.instance.init(clearOn: kDebugMode);
+  await LocalDatabase.instance.init(clearOn: false);
 
   AppServiceCubit.init();
 
