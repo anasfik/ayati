@@ -52,25 +52,29 @@ class NotificationController {
         id: 11,
         channelKey: 'basic_channel',
         title: ayah.text,
-        body: ayah.number.toString(),
-        wakeUpScreen: true,
-        notificationLayout: NotificationLayout.BigText,
+        body: ayah.customNotificationText(),
+        notificationLayout: NotificationLayout.Default,
         actionType: ActionType.KeepOnTop,
         autoDismissible: false,
-        category: NotificationCategory.Recommendation,
+        category: NotificationCategory.LocalSharing,
         displayOnBackground: true,
         displayOnForeground: true,
         locked: true,
         payload: {
           "currentAyah": jsonEncode(ayah.toMap()),
         },
+        backgroundColor: Colors.green.shade100,
+        badge: ayah.numberInSurah,
+        fullScreenIntent: true,
       ),
       actionButtons: <NotificationActionButton>[
         NotificationActionButton(
-          key: 'Count',
-          label: 'Count',
+          key: 'mark_as_read',
+          label: 'Mark as read',
           enabled: true,
           actionType: ActionType.Default,
+          showInCompactView: true,
+          color: Colors.green,
         ),
       ],
     );
@@ -85,7 +89,7 @@ class NotificationController {
           channelKey: 'basic_channel',
           channelName: 'Basic notifications',
           channelDescription: 'Notification channel for basic tests',
-          defaultColor: const Color(0xFF9D50DD),
+          defaultColor: Colors.green,
           ledColor: const Color(0xFFFFFFFF),
         ),
       ],
@@ -96,6 +100,7 @@ class NotificationController {
           channelGroupName: 'Basic group',
         )
       ],
+
       debug: kDebugMode,
     );
   }

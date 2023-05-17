@@ -10,7 +10,7 @@ class TodoBox extends StatelessWidget {
     return BlocBuilder<AppServiceCubit, AppServiceState>(
       builder: (context, state) {
         if (state.fetcherState.areAyahsSavedForLaterUse) {
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }
 
         return Container(
