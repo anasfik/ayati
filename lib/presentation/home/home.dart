@@ -6,6 +6,7 @@ import 'main_service.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/logo.dart';
 import 'widgets/start_button.dart';
+import 'widgets/todo_box.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -32,8 +33,10 @@ class HomeView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const <Widget>[
                 SizedBox(height: height * 2),
+                TodoBox(),
                 Spacer(),
                 AppLogo(),
+                SizedBox(height: kToolbarHeight),
                 Spacer(),
                 MainServiceSection(),
                 SizedBox(height: height * 2),
