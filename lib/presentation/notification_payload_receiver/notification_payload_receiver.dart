@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:ayat_notifications/logic/app_service/app_service_cubit.dart';
+import 'package:ayat_notifications/presentation/general/button.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/ayah.dart';
@@ -43,10 +44,9 @@ class NotificationPayloadReceiver extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.75,
               height: 50,
-              child: ElevatedButton(
-                onPressed: () =>
-                    appCubit.createNextAyahNotification(currentAyah),
-                child: const Text("Show Next Ayah"),
+              child: AyatiButton(
+                onTap: () => appCubit.createNextAyahNotification(currentAyah),
+                text: "Show Next Ayah",
               ),
             ),
             const SizedBox(height: height * 2),

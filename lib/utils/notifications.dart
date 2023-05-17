@@ -3,7 +3,9 @@ import 'dart:ui';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:ayat_notifications/data/models/ayah.dart';
+import 'package:ayat_notifications/presentation/notification_payload_receiver/notification_payload_receiver.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import '../main.dart';
 
@@ -104,5 +106,35 @@ class NotificationController {
 
   static Future<void> dismissAllNotification() {
     return AwesomeNotifications().dismissAllNotifications();
+  }
+
+  static Future<void> setListeners() {
+    return AwesomeNotifications().setListeners(
+      onActionReceivedMethod: onActionReceivedMethod,
+      onNotificationCreatedMethod: onNotificationCreatedMethod,
+      onNotificationDisplayedMethod: onNotificationDisplayedMethod,
+      onDismissActionReceivedMethod: onDismissActionReceivedMethod,
+    );
+  }
+
+  static Route<dynamic>? onGenerateRoute(settings) {
+    switch (settings.name) {
+      case '/notification-page':
+        return MaterialPageRoute(
+          builder: (context) {
+            final ReceivedAction receivedAction =
+                settings.arguments as ReceivedAction;
+
+            return NotificationPayloadReceiver(
+              receivedAction: receivedAction,
+              appCubit: appCubit,
+            );
+          },
+        );
+
+      default:
+        assert(false, 'Page ${settings.name} not found');
+        return null;
+    }
   }
 }

@@ -14,7 +14,7 @@ class AyatiButton extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.75,
       height: 50,
-      child: ElevatedButton(
+      child: FilledButton(
         onPressed: onTap,
         child: Text(text),
       ),

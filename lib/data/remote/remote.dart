@@ -16,12 +16,16 @@ class RemoteSource implements RemoteSourceBase {
 
   Future<QuranResponse> _fetchAyat(dynamic _) async {
     try {
-      final response = await http.get(
+      final client = http.Client();
+
+      final response = await client.get(
         Uri.parse(
           'http://api.alquran.cloud/v1/quran/ar.asad',
         ),
         headers: {
-          'Connection': 'Keep-Alive',
+          'Connection': 'keep-alive',
+          'Accept': 'application/json',
+          'Keep-Alive': 'timeout=5, max=1000'
         },
       );
       if (response.isOk) {

@@ -5,9 +5,10 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return Image.asset(
+      "assets/images/app_icon.png",
       width: 100.0,
-      child: Placeholder(fallbackHeight: 100.0),
+      height: 100.0,
     );
   }
 }

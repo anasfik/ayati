@@ -23,6 +23,7 @@ class AppServiceCubit extends Cubit<AppServiceState> {
   }) : super(
           AppServiceInitial(fetcherState: fetcherCubit.state),
         ) {
+    NotificationController.setListeners();
     _listenToFetcherCubit();
   }
 
