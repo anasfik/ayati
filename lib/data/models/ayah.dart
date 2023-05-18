@@ -81,6 +81,6 @@ class Ayah extends Equatable {
       ];
 
   String customNotificationText() {
-    return '${numberInSurah.toString()} of 6236 in the Quran, Hizb $hizbQuarter';
+    return '${number.toString()} of 6236 in the Quran, Hizb $hizbQuarter';
   }
 }

@@ -9,17 +9,24 @@ import 'base/base.dart';
 
 class LocalDatabase implements LocalDatabaseBase {
   static LocalDatabase get instance => _instance;
+
+  @override
+  String get ayatBoxName => 'ayats';
+
+  @override
+  String get surahBoxName => "surahs";
+
   @override
   Future<void> clear() async {
     await Future.wait([
-      Hive.box<Surah>('surahs').clear(),
-      Hive.box<Ayah>('ayahs').clear(),
+      Hive.box<Surah>(surahBoxName).clear(),
+      Hive.box<Ayah>(ayatBoxName).clear(),
     ]);
   }
 
   @override
   Future<void> delete(String key) {
-    return Hive.box('surahs').delete(key);
+    return Hive.box(surahBoxName).delete(key);
   }
 
   @override
@@ -29,7 +36,7 @@ class LocalDatabase implements LocalDatabaseBase {
 
   @override
   dynamic get(String key) {
-    final box = Hive.box<Surah>('surahs');
+    final box = Hive.box<Surah>(surahBoxName);
 
     return box.get(key);
   }
@@ -44,18 +51,18 @@ class LocalDatabase implements LocalDatabaseBase {
     Hive.registerAdapter(AyahAdapter());
     Hive.registerAdapter(RevelationTypeAdapter());
 
-    await Hive.openBox<Surah>('surahs');
-    await Hive.openBox<Ayah>('ayahs');
+    await Hive.openBox<Surah>(surahBoxName);
+    await Hive.openBox<Ayah>(ayatBoxName);
     if (clearOn) {
       await clear();
-      assert(Hive.box<Surah>('surahs').isEmpty);
-      assert(Hive.box<Ayah>('ayahs').isEmpty);
+      assert(Hive.box<Surah>(surahBoxName).isEmpty);
+      assert(Hive.box<Ayah>(ayatBoxName).isEmpty);
     }
   }
 
   @override
   Future<void> save(String key, Surah value) async {
-    final box = Hive.box<Surah>('surahs');
+    final box = Hive.box<Surah>(surahBoxName);
     await box.add(value);
   }
 
@@ -76,21 +83,21 @@ class LocalDatabase implements LocalDatabaseBase {
   LocalDatabase._();
 
   bool isSurahsAlreadySaved() {
-    final box = Hive.box<Surah>('surahs');
+    final box = Hive.box<Surah>(surahBoxName);
 
     return box.isNotEmpty;
   }
 
   Future<void> saveCurrentAyah(Ayah ayah) async {
-    final box = Hive.box<Ayah>('ayahs');
+    final box = Hive.box<Ayah>(ayatBoxName);
 
     await box.put('currentAyah', ayah);
   }
 
   Future<Ayah> currentAyah() async {
-    final box = Hive.box<Ayah>('ayahs');
+    final box = Hive.box<Ayah>(ayatBoxName);
     if (box.get('currentAyah') == null) {
-      final firstSurah = Hive.box<Surah>('surahs').values.first;
+      final firstSurah = Hive.box<Surah>(surahBoxName).values.first;
       final firstAyah = firstSurah.ayahs.first;
       await saveCurrentAyah(firstAyah);
     }
@@ -114,7 +121,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   Surah _searchForSurahWithAyahNumber(Ayah ayah) {
-    final surahs = Hive.box<Surah>('surahs').values;
+    final surahs = Hive.box<Surah>(surahBoxName).values;
     for (final surah in surahs) {
       if (surah.ayahs.contains(ayah)) {
         return surah;
@@ -138,7 +145,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   Surah _getNextSurah(Surah surah) {
-    final surahs = Hive.box<Surah>('surahs').values;
+    final surahs = Hive.box<Surah>(surahBoxName).values;
     final surahsList = surahs.toList();
     final currentSurahIndex = surahsList.indexOf(surah);
     final nextSurahIndex = currentSurahIndex + 1;

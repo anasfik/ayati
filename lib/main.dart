@@ -9,22 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'logic/ayat_fetcher/ayat_fetcher_cubit.dart';
 import 'presentation/notification_payload_receiver/notification_payload_receiver.dart';
+import 'utils/other.dart';
 import 'utils/routing_handler.dart';
 import 'utils/themes_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await LocalDatabase.instance.init(clearOn: false);
-
+  await LocalDatabase.instance.init(clearOn: kDebugMode);
   AppServiceCubit.init();
+  HttpOverrides.global = MyHttpOverrides();
 
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  static final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
+  static final navigatorKey = GlobalKey<NavigatorState>();
 
   const MainApp({super.key});
 
@@ -38,25 +37,15 @@ class MainApp extends StatelessWidget {
             create: (context) =>
                 AppServiceCubit(fetcherCubit: context.read<AyatFetcherCubit>()),
             child: MaterialApp(
-              // The navigator key is necessary to allow to navigate through static methods
               navigatorKey: navigatorKey,
               onGenerateRoute: NotificationController.onGenerateRoute,
               theme: ThemesHandler.light,
               routes: RoutingHandler.all,
-              initialRoute: RoutingHandler.initial,
+              initialRoute: RoutingPaths.initial,
             ),
           );
         },
       ),
     );
-  }
-}
-
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
   }
 }

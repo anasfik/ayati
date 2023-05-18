@@ -6,6 +6,9 @@ abstract class LocalDatabaseBase {
   Future<void> init({
     required bool clearOn,
   });
+  String get ayatBoxName;
+  String get surahBoxName;
+
   Future save(String key, Surah value);
   Future saveSurah(String key, Surah value);
   dynamic get(String key);

@@ -1,4 +1,5 @@
 import 'package:ayat_notifications/logic/app_service/app_service_cubit.dart';
+import 'package:ayat_notifications/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,21 +28,17 @@ class TodoBox extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Info",
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                    AppStrings.info,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                  const Icon(
-                    Icons.info_outline,
-                    size: 20,
-                  ),
+                  const Icon(Icons.info_outline, size: 20),
                 ],
               ),
               const SizedBox(height: 10),
-              const Text(
-                "For the very first app use, you will need to load the data from the internet that it will be used for the app service to work.",
-              ),
+              const Text(AppStrings.todoBoxText),
             ],
           ),
         );

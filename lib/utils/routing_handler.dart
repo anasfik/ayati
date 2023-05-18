@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../presentation/home/home.dart';
+import '../presentation/notification_payload_receiver/notification_payload_receiver.dart';
+import '../presentation/privacy/privacy.dart';
 
 abstract class RoutingHandler {
-  static final initial = _RoutingPaths().initial;
   static final all = <String, Widget Function(BuildContext context)>{
-    initial: (context) => const HomeView(),
+    RoutingPaths.initial: (context) => const HomeView(),
+    RoutingPaths.privacy: (context) => const PrivacyAndPolicy(),
   };
 }
 
-class _RoutingPaths {
-  static _RoutingPaths _instance = _RoutingPaths._();
-
-  final initial = '/';
-  _RoutingPaths._();
-
-  factory _RoutingPaths() {
-    return _instance;
-  }
+abstract class RoutingPaths {
+  static const initial = '/';
+  static const notificationPage = '/notification-page';
+  static const privacy = '/privacy';
 }

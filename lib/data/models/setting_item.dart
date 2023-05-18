@@ -7,8 +7,8 @@ class SettingItem extends Equatable {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
-  final String successText;
-  final String errorText;
+  final String? successText;
+  final String? errorText;
 
   const SettingItem({
     required this.icon,

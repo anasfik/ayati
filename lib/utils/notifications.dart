@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:ayat_notifications/data/models/ayah.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../data/local/local.dart';
 import '../main.dart';
+import 'routing_handler.dart';
 
 class NotificationController {
   /// Use this method to detect when a new notification or a schedule is created
@@ -41,10 +41,10 @@ class NotificationController {
 
     // Navigate into pages, avoiding to open the notification details page over another details page already opened
     MainApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(
-        '/notification-page',
-        (route) =>
-            (route.settings.name != '/notification-page') || route.isFirst,
-        arguments: receivedAction);
+      '/notification-page',
+      (route) => (route.settings.name != '/notification-page') || route.isFirst,
+      arguments: receivedAction,
+    );
   }
 
   static Future<bool> createAyahNotification(Ayah ayah) async {
@@ -125,7 +125,7 @@ class NotificationController {
 
   static Route<dynamic>? onGenerateRoute(settings) {
     switch (settings.name) {
-      case '/notification-page':
+      case RoutingPaths.notificationPage:
         return MaterialPageRoute(
           builder: (context) {
             final ReceivedAction receivedAction =

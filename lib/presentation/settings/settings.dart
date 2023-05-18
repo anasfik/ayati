@@ -1,7 +1,9 @@
+import 'package:ayat_notifications/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/cubit/settings_cubit.dart';
+import '../../utils/routing_handler.dart';
 import '../general/section_title.dart';
 
 class Settings extends StatelessWidget {
@@ -17,6 +19,9 @@ class Settings extends StatelessWidget {
         builder: (context) {
           final cubit = context.read<SettingsCubit>();
 
+          final settingsItems = cubit.settingsItems(onPrivacyPolicyTap: () {
+            Navigator.of(context).pushNamed(RoutingPaths.privacy);
+          });
           return Scaffold(
             appBar: AppBar(),
             body: Column(
@@ -25,13 +30,13 @@ class Settings extends StatelessWidget {
                 const SizedBox(height: height * 2),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: const SectionTitle(title: "Settings"),
+                  child: const SectionTitle(title: AppStrings.settings),
                 ),
                 const SizedBox(height: height * 2),
                 ...List.generate(
-                  cubit.settingsItems.length,
+                  settingsItems.length,
                   (index) {
-                    final current = cubit.settingsItems[index];
+                    final current = settingsItems[index];
                     return ListTile(
                       onTap: current.onTap,
                       title: Text(current.title),

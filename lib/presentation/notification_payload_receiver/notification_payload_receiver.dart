@@ -24,6 +24,7 @@ class NotificationPayloadReceiver extends StatelessWidget {
         receivedAction.payload!["currentAyah"]!,
       ),
     );
+
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
