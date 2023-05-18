@@ -7,6 +7,7 @@ import 'package:ayat_notifications/presentation/notification_payload_receiver/no
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../data/local/local.dart';
 import '../main.dart';
 
 class NotificationController {
@@ -132,7 +133,6 @@ class NotificationController {
 
             return NotificationPayloadReceiver(
               receivedAction: receivedAction,
-              appCubit: appCubit,
             );
           },
         );
@@ -141,5 +141,12 @@ class NotificationController {
         assert(false, 'Page ${settings.name} not found');
         return null;
     }
+  }
+
+  static Future<bool> createNextAyahNotification(Ayah currentAyah) async {
+    final nextAyah = LocalDatabase.instance.nextAyahThan(currentAyah);
+    await LocalDatabase.instance.saveCurrentAyah(nextAyah);
+
+    return createAyahNotification(nextAyah);
   }
 }

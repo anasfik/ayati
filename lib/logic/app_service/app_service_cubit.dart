@@ -53,13 +53,6 @@ class AppServiceCubit extends Cubit<AppServiceState> {
     return NotificationController.createAyahNotification(ayah);
   }
 
-  Future<bool> createNextAyahNotification(Ayah currentAyah) async {
-    final nextAyah = LocalDatabase.instance.nextAyahThan(currentAyah);
-    await LocalDatabase.instance.saveCurrentAyah(nextAyah);
-
-    return createAyahNotification(nextAyah);
-  }
-
   static Future<bool> init() {
     return NotificationController.init();
   }

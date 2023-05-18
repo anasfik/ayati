@@ -12,9 +12,6 @@ import 'presentation/notification_payload_receiver/notification_payload_receiver
 import 'utils/routing_handler.dart';
 import 'utils/themes_handler.dart';
 
-final ayatFetcherCubit = AyatFetcherCubit();
-final appCubit = AppServiceCubit(fetcherCubit: ayatFetcherCubit);
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -33,18 +30,23 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: <BlocProvider>[
-        BlocProvider<AyatFetcherCubit>.value(value: ayatFetcherCubit),
-        BlocProvider<AppServiceCubit>.value(value: appCubit),
-      ],
-      child: MaterialApp(
-        // The navigator key is necessary to allow to navigate through static methods
-        navigatorKey: navigatorKey,
-        onGenerateRoute: NotificationController.onGenerateRoute,
-        theme: ThemesHandler.light,
-        routes: RoutingHandler.all,
-        initialRoute: RoutingHandler.initial,
+    return BlocProvider<AyatFetcherCubit>(
+      create: (context) => AyatFetcherCubit(),
+      child: Builder(
+        builder: (context) {
+          return BlocProvider(
+            create: (context) =>
+                AppServiceCubit(fetcherCubit: context.read<AyatFetcherCubit>()),
+            child: MaterialApp(
+              // The navigator key is necessary to allow to navigate through static methods
+              navigatorKey: navigatorKey,
+              onGenerateRoute: NotificationController.onGenerateRoute,
+              theme: ThemesHandler.light,
+              routes: RoutingHandler.all,
+              initialRoute: RoutingHandler.initial,
+            ),
+          );
+        },
       ),
     );
   }

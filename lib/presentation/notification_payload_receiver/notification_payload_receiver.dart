@@ -6,16 +6,15 @@ import 'package:ayat_notifications/presentation/general/button.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/ayah.dart';
+import '../../utils/notifications.dart';
 
 class NotificationPayloadReceiver extends StatelessWidget {
   const NotificationPayloadReceiver({
     super.key,
     required this.receivedAction,
-    required this.appCubit,
   });
 
   final ReceivedAction receivedAction;
-  final AppServiceCubit appCubit;
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
@@ -35,7 +34,7 @@ class NotificationPayloadReceiver extends StatelessWidget {
             const SizedBox(height: height * 2),
             const Spacer(),
             Text(
-              "${currentAyah.text}",
+              currentAyah.text,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 20.0),
@@ -45,7 +44,8 @@ class NotificationPayloadReceiver extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.75,
               height: 50,
               child: AyatiButton(
-                onTap: () => appCubit.createNextAyahNotification(currentAyah),
+                onTap: () => NotificationController.createNextAyahNotification(
+                    currentAyah),
                 text: "Show Next Ayah",
               ),
             ),
