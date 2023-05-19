@@ -37,8 +37,9 @@ class NotificationPayloadReceiver extends StatelessWidget {
             Text(
               currentAyah.text,
               style: Theme.of(context).textTheme.headlineMedium,
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 30.0),
             Text("${currentAyah.number}"),
             const Spacer(),
             SizedBox(
