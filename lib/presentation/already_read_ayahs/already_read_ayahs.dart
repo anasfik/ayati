@@ -50,6 +50,7 @@ class AlreadyReadedAyahs extends StatelessWidget {
                                 ),
                                 SizedBox(height: height * 2),
                                 SearchBar(),
+                                SizedBox(height: height * 2),
                               ],
                             ),
                           );

@@ -19,8 +19,8 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
       surfaceTintColor: Colors.transparent,
       actions: const <Widget>[
         SizedBox(
-          width: 140,
-          height: 40,
+          width: 110,
+          height: 35,
           child: MainServiceSection(),
         ),
         SizedBox(width: 15.0),
