@@ -22,6 +22,7 @@ class Settings extends StatelessWidget {
           final settingsItems = cubit.settingsItems(onPrivacyPolicyTap: () {
             Navigator.of(context).pushNamed(RoutingPaths.privacy);
           });
+
           return Scaffold(
             appBar: AppBar(),
             body: Column(

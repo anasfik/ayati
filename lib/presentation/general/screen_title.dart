@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ScreenTitle extends StatelessWidget {
-  const ScreenTitle({
+class ScreenViewTitle extends StatelessWidget {
+  const ScreenViewTitle({
     super.key,
     required this.text,
   });
@@ -11,7 +11,7 @@ class ScreenTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context).textTheme.headlineMedium,
+      style: Theme.of(context).textTheme.headlineLarge,
     );
   }
 }

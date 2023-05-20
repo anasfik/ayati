@@ -45,7 +45,7 @@ class AlreadyReadedAyahs extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const <Widget>[
-                                ScreenTitle(
+                                ScreenViewTitle(
                                   text: AppStrings.alreadyReadedAyahs,
                                 ),
                                 SizedBox(height: height * 2),
