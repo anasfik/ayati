@@ -38,14 +38,16 @@ class AlreadyReadedAyahsCubit extends Cubit<AlreadyReadedAyahsState> {
     }
 
     final searchQuery = controller.text;
-    final ayahsThatLatchSearchQuery = state.alreadyReadAyahs.where(
-      (ayah) => ayah.matchesSearchQuery(searchQuery),
-    );
 
-    emit(state.copyWith(searchedAyahs: ayahsThatLatchSearchQuery.toList()));
+    final ayahsThatLatchSearchQuery = state.alreadyReadAyahs
+        .where((ayah) => ayah.matchesSearchQuery(searchQuery))
+        .toList();
+
+    emit(state.copyWith(searchedAyahs: ayahsThatLatchSearchQuery));
   }
 
   void resetSearch() {
+    searchController!.clear();
     emit(state.copyWith(searchedAyahs: const <Ayah>[]));
   }
 }

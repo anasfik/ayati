@@ -24,11 +24,10 @@ class Settings extends StatelessWidget {
           });
 
           return Scaffold(
-            appBar: AppBar(),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const SizedBox(height: height * 2),
+                const SizedBox(height: kToolbarHeight),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: const SectionTitle(title: AppStrings.settings),

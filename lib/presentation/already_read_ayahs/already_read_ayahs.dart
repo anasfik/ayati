@@ -22,7 +22,6 @@ class AlreadyReadedAyahs extends StatelessWidget {
           final cubit = context.read<AlreadyReadedAyahsCubit>();
 
           return Scaffold(
-            appBar: AppBar(),
             floatingActionButton: const FAB(),
             body: MarginedBody(
               child: Directionality(
@@ -45,9 +44,9 @@ class AlreadyReadedAyahs extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const <Widget>[
+                                SizedBox(height: kToolbarHeight),
                                 ScreenViewTitle(
-                                  text: AppStrings.alreadyReadedAyahs,
-                                ),
+                                    text: AppStrings.alreadyReadedAyahs),
                                 SizedBox(height: height * 2),
                                 SearchBar(),
                                 SizedBox(height: height * 2),
@@ -55,7 +54,7 @@ class AlreadyReadedAyahs extends StatelessWidget {
                             ),
                           );
                         } else {
-                          final ayah = state.alreadyReadAyahs[index - 1];
+                          final ayah = ayatsToShow.reversed.toList()[index - 1];
 
                           return ListTile(
                             title: Text(ayah.text),

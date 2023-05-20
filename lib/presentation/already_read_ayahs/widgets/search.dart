@@ -28,7 +28,7 @@ class SearchBar extends StatelessWidget {
                         cubit.resetSearch();
                       },
                       child: Icon(
-                        FlutterRemix.search_2_line,
+                        FlutterRemix.close_line,
                         size: 22,
                         color:
                             Theme.of(context).iconTheme.color!.withOpacity(.4),
