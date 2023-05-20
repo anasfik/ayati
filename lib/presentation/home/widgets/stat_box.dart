@@ -41,9 +41,11 @@ class StatBox extends StatelessWidget {
                                 2),
                   ),
                 ),
-                // const Spacer(),ayahsProgress
-                const Icon(
-                  FlutterIslamicIcons.quran,
+                const SizedBox(
+                  width: 5,
+                ),
+                Icon(
+                  statItem.icon,
                   color: AppColors.green,
                   size: 28,
                 ),

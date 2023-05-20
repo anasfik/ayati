@@ -81,13 +81,35 @@ class AppServiceCubit extends Cubit<AppServiceState> {
           ),
         ),
         StatItem(
-          title: AppStrings.ayahsProgress,
-          icon: FlutterIslamicIcons.mosque,
+          title: AppStrings.currentSurah,
+          icon: FlutterIslamicIcons.quran2,
           valueStream: LocalDatabase.instance.valueStream<String, Ayah>(
             boxName: LocalDatabase.instance.ayatBoxName,
             key: 'currentAyah',
             mapper: (ayah) {
-              return ayah.number.toString() + ' / ' + "6236";
+              return "${ayah.surah?.name} - ${ayah.surah?.number}";
+            },
+          ),
+        ),
+        StatItem(
+          title: AppStrings.ayahsProgress,
+          icon: FlutterIslamicIcons.prayer,
+          valueStream: LocalDatabase.instance.valueStream<String, Ayah>(
+            boxName: LocalDatabase.instance.ayatBoxName,
+            key: 'currentAyah',
+            mapper: (ayah) {
+              return "${ayah.number} / 6236";
+            },
+          ),
+        ),
+        StatItem(
+          title: AppStrings.hizbProgress,
+          icon: FlutterIslamicIcons.hadji,
+          valueStream: LocalDatabase.instance.valueStream<String, Ayah>(
+            boxName: LocalDatabase.instance.ayatBoxName,
+            key: 'currentAyah',
+            mapper: (ayah) {
+              return "${ayah.hizbQuarter} / 60";
             },
           ),
         ),

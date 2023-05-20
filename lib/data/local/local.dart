@@ -30,6 +30,7 @@ class LocalDatabase implements LocalDatabaseBase {
     await Future.wait([
       Hive.box<Surah>(surahBoxName).clear(),
       Hive.box<Ayah>(ayatBoxName).clear(),
+      // Hive.deleteFromDisk(),
     ]);
   }
 
@@ -96,7 +97,7 @@ class LocalDatabase implements LocalDatabaseBase {
         ayahs: currentSurahAyasReferecesTHeSUrahItSelf,
       );
 
-      await saveSurah(currentSurah.englishName, currentSurah);
+      saveSurah(currentSurah.englishName, currentSurah);
     }
   }
 

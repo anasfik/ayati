@@ -39,6 +39,7 @@ class HomeView extends StatelessWidget {
                   TodoBox(),
                   SizedBox(height: height * 2),
                   HomeTitle(title: AppStrings.stats),
+                  SizedBox(height: height),
                   StatsGrid(),
                 ],
               ),

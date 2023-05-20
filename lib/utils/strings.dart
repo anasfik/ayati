@@ -18,4 +18,7 @@ abstract class AppStrings {
 
   static const currentAyah = "Current Ayah";
   static const ayahsProgress = "Ayahs Progress";
+  static const hizbProgress = "Hizb Progress";
+
+  static const String currentSurah = "Current Surah";
 }

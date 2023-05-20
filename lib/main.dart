@@ -15,7 +15,7 @@ import 'utils/themes_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalDatabase.instance.init(clearOn: false);
+  await LocalDatabase.instance.init(clearOn: true);
   AppServiceCubit.init();
   HttpOverrides.global = MyHttpOverrides();
 

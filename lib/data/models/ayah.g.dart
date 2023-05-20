@@ -26,13 +26,14 @@ class AyahAdapter extends TypeAdapter<Ayah> {
       ruku: fields[6] as int,
       hizbQuarter: fields[7] as int,
       sajda: fields[8] as dynamic,
+      surah: fields[9] as Surah?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Ayah obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.number)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class AyahAdapter extends TypeAdapter<Ayah> {
       ..writeByte(7)
       ..write(obj.hizbQuarter)
       ..writeByte(8)
-      ..write(obj.sajda);
+      ..write(obj.sajda)
+      ..writeByte(9)
+      ..write(obj.surah);
   }
 
   @override
