@@ -9,8 +9,13 @@ import 'package:ayat_notifications/main.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../data/models/stat_item.dart';
 import '../../utils/notifications.dart';
+import '../../utils/strings.dart';
 import '../ayat_fetcher/ayat_fetcher_cubit.dart';
 
 part 'app_service_state.dart';
@@ -62,4 +67,33 @@ class AppServiceCubit extends Cubit<AppServiceState> {
       emit(state.copyWith(fetcherState: fetcherState));
     });
   }
+
+  List<StatItem> get statsItems => [
+        // const StatItem(
+        //   title: AppStrings.currentAyah,
+        //   icon: FlutterRemix.account_box_line,
+        //   valueStream: Stream.empty(),
+        // ),
+        StatItem(
+          title: AppStrings.currentAyah,
+          icon: FlutterIslamicIcons.quran,
+          valueStream: LocalDatabase.instance.valueStream<String, Ayah>(
+            boxName: LocalDatabase.instance.ayatBoxName,
+            key: 'currentAyah',
+            mapper: (ayah) {
+              return ayah.text;
+            },
+          ),
+        ),
+        // const StatItem(
+        //   title: AppStrings.ayats,
+        //   icon: FlutterRemix.account_box_line,
+        //   valueStream: Stream.empty(),
+        // ),
+        // const StatItem(
+        //   title: AppStrings.ayats,
+        //   icon: FlutterRemix.account_box_line,
+        //   valueStream: Stream.empty(),
+        // ),
+      ];
 }

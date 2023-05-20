@@ -1,7 +1,10 @@
 import 'package:ayat_notifications/presentation/settings/settings.dart';
+import 'package:ayat_notifications/utils/enum.dart';
 import 'package:flutter/material.dart';
 
 import '../../already_read_ayahs/already_read_ayahs.dart';
+import '../../general/logo.dart';
+import '../main_service.dart';
 
 class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   const HomeAppBar({super.key});
@@ -9,28 +12,17 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: <Widget>[
-        IconButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const Settings(),
-              ),
-            );
-          },
-          icon: const Icon(Icons.settings),
+      leading: const AyatiLogo(
+        size: 40,
+        type: AyatiLogoType.transparent,
+      ),
+      actions: const <Widget>[
+        SizedBox(
+          width: 140,
+          height: 40,
+          child: MainServiceSection(),
         ),
-        const SizedBox(width: 10.0),
-        IconButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AlreadyReadedAyahs(),
-              ),
-            );
-          },
-          icon: const Icon(Icons.notifications),
-        ),
+        SizedBox(width: 15.0),
       ],
     );
   }

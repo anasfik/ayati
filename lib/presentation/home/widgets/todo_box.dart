@@ -16,7 +16,6 @@ class TodoBox extends StatelessWidget {
 
         return Container(
           padding: const EdgeInsets.all(16.0),
-          margin: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary.withOpacity(.1),
             borderRadius: BorderRadius.circular(10),

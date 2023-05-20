@@ -203,4 +203,14 @@ class LocalDatabase implements LocalDatabaseBase {
 
     return allAyahs.where((ayah) => ayah.number <= current.number).toList();
   }
+
+  Stream<T> valueStream<T, R>({
+    required String boxName,
+    required String key,
+    required T Function(R) mapper,
+  }) {
+    return Hive.box<R>(boxName).watch(key: key).map((event) {
+      return mapper(event.value as R);
+    });
+  }
 }

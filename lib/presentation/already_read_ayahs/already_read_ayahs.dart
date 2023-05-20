@@ -29,6 +29,7 @@ class AlreadyReadedAyahs extends StatelessWidget {
                       return ListTile(
                         title: Text(ayah.text),
                         trailing: Text(ayah.number.toString()),
+                        subtitle: Text("${ayah.surah?.name}"),
                       );
                     },
                   );
