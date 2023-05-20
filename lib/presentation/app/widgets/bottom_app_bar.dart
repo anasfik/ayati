@@ -14,7 +14,7 @@ class HomeBottomAppBar extends StatelessWidget {
     return BlocBuilder<AppServiceCubit, AppServiceState>(
         builder: (context, state) {
       return SizedBox(
-        height: 85,
+        height: 87.5,
         child: BottomAppBar(
           color: Colors.transparent,
           elevation: 0,
