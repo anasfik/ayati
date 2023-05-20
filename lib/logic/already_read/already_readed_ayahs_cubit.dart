@@ -8,16 +8,16 @@ import '../../data/models/ayah.dart';
 part 'already_readed_ayahs_state.dart';
 
 class AlreadyReadedAyahsCubit extends Cubit<AlreadyReadedAyahsState> {
-  TextEditingController? controller;
+  TextEditingController? searchController;
 
   AlreadyReadedAyahsCubit() : super(AlreadyReadedAyahsInitial()) {
-    controller = TextEditingController();
+    searchController = TextEditingController();
     _init();
   }
 
   @override
   Future<void> close() {
-    controller!.dispose();
+    searchController!.dispose();
 
     return super.close();
   }
@@ -31,5 +31,21 @@ class AlreadyReadedAyahsCubit extends Cubit<AlreadyReadedAyahsState> {
     }
   }
 
-  void executeSearch() {}
+  void executeSearch() {
+    final controller = searchController;
+    if (controller == null) {
+      return;
+    }
+
+    final searchQuery = controller.text;
+    final ayahsThatLatchSearchQuery = state.alreadyReadAyahs.where(
+      (ayah) => ayah.matchesSearchQuery(searchQuery),
+    );
+
+    emit(state.copyWith(searchedAyahs: ayahsThatLatchSearchQuery.toList()));
+  }
+
+  void resetSearch() {
+    emit(state.copyWith(searchedAyahs: const <Ayah>[]));
+  }
 }

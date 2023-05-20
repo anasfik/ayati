@@ -30,8 +30,12 @@ class AlreadyReadedAyahs extends StatelessWidget {
                 child: BlocBuilder<AlreadyReadedAyahsCubit,
                     AlreadyReadedAyahsState>(
                   builder: (context, state) {
+                    final ayatsToShow = state.searchedAyahs.isNotEmpty
+                        ? state.searchedAyahs
+                        : state.alreadyReadAyahs;
+
                     return ListView.builder(
-                      itemCount: state.alreadyReadAyahs.length + 1,
+                      itemCount: ayatsToShow.length + 1,
                       itemBuilder: (context, index) {
                         if (index == 0) {
                           return Directionality(
@@ -49,14 +53,15 @@ class AlreadyReadedAyahs extends StatelessWidget {
                               ],
                             ),
                           );
-                        } else {}
-                        final ayah = state.alreadyReadAyahs[index - 1];
+                        } else {
+                          final ayah = state.alreadyReadAyahs[index - 1];
 
-                        return ListTile(
-                          title: Text(ayah.text),
-                          trailing: Text(ayah.number.toString()),
-                          subtitle: Text("${ayah.surah?.name}"),
-                        );
+                          return ListTile(
+                            title: Text(ayah.text),
+                            trailing: Text(ayah.number.toString()),
+                            subtitle: Text("${ayah.surah?.name}"),
+                          );
+                        }
                       },
                     );
                   },

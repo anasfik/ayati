@@ -128,4 +128,20 @@ class Ayah extends Equatable {
 
   factory Ayah.fromJson(String source) =>
       Ayah.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  bool matchesSearchQuery(String searchQuery) {
+    final query = searchQuery;
+
+    final doesTextContainsQuery =
+        text.toLowerCase().contains(query.toLowerCase());
+
+    final doesItMatchNumber =
+        number.toString().toLowerCase().contains(query.toLowerCase());
+
+    final doesSurahSearchMatchesQuery = surah?.matchesSearch(query) ?? false;
+
+    return doesTextContainsQuery ||
+        doesSurahSearchMatchesQuery ||
+        doesItMatchNumber;
+  }
 }

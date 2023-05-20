@@ -84,6 +84,17 @@ class Surah extends Equatable {
 
   String toJson() => json.encode(toMap());
 
+  bool matchesSearch(String searchQuery) {
+    final query = searchQuery;
+
+    final doesNameMatches = name.toLowerCase().contains(query.toLowerCase());
+
+    final doesEnglishName =
+        englishName.toLowerCase().contains(query.toLowerCase());
+
+    return doesNameMatches || doesEnglishName;
+  }
+
   factory Surah.fromJson(String source) =>
       Surah.fromMap(json.decode(source) as Map<String, dynamic>);
 }
