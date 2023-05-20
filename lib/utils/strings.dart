@@ -21,4 +21,6 @@ abstract class AppStrings {
   static const hizbProgress = "Hizb Progress";
 
   static const String currentSurah = "Current Surah";
+  static const String continueText = "Continue";
+  static const String continueReading = "Continue Reading";
 }

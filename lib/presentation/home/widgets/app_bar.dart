@@ -1,4 +1,3 @@
-import 'package:ayat_notifications/presentation/settings/settings.dart';
 import 'package:ayat_notifications/utils/enum.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +15,8 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
         size: 40,
         type: AyatiLogoType.transparent,
       ),
+      elevation: 0,
+      surfaceTintColor: Colors.transparent,
       actions: const <Widget>[
         SizedBox(
           width: 140,

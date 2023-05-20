@@ -1,14 +1,10 @@
 import 'dart:io';
-
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:ayat_notifications/data/local/local.dart';
 import 'package:ayat_notifications/logic/app_service/app_service_cubit.dart';
 import 'package:ayat_notifications/utils/notifications.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'logic/ayat_fetcher/ayat_fetcher_cubit.dart';
-import 'presentation/notification_payload_receiver/notification_payload_receiver.dart';
 import 'utils/other.dart';
 import 'utils/routing_handler.dart';
 import 'utils/themes_handler.dart';

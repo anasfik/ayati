@@ -156,6 +156,19 @@ class LocalDatabase implements LocalDatabaseBase {
     }
   }
 
+  Ayah previousAyahThan(Ayah currentAyah) {
+    final currentAyahNumber = currentAyah.number;
+    final surah = _searchForSurahWithAyahNumber(currentAyah);
+    final previousAyahNumber = currentAyahNumber - 1;
+    final previousAyah = _getAyahFromSurah(surah, previousAyahNumber);
+    if (previousAyah != null) {
+      return previousAyah;
+    } else {
+      final previousSurah = _getPreviousSurah(surah);
+      return previousSurah.ayahs.last;
+    }
+  }
+
   /// Returns a [Surah] with the given [ayah] number.
   Surah _searchForSurahWithAyahNumber(Ayah ayah) {
     final surahs = Hive.box<Surah>(surahBoxName).values;
@@ -192,6 +205,18 @@ class LocalDatabase implements LocalDatabaseBase {
       return surahsList[nextSurahIndex];
     } else {
       throw Exception('No next surah found');
+    }
+  }
+
+  Surah _getPreviousSurah(Surah surah) {
+    final surahs = Hive.box<Surah>(surahBoxName).values;
+    final surahsList = surahs.toList();
+    final currentSurahIndex = surahsList.indexOf(surah);
+    final previousSurahIndex = currentSurahIndex - 1;
+    if (previousSurahIndex >= 0) {
+      return surahsList[previousSurahIndex];
+    } else {
+      throw Exception('No previous surah found');
     }
   }
 
@@ -234,5 +259,27 @@ class LocalDatabase implements LocalDatabaseBase {
     onValueTriggered();
 
     return controller.stream;
+  }
+
+  Stream<Ayah?> currentAyahStream() {
+    return valueStream<Ayah, Ayah>(
+      boxName: ayatBoxName,
+      key: "currentAyah",
+      mapper: (event) {
+        return event;
+      },
+    );
+  }
+
+  void nextAyahThanCurrent() {
+    final current = currentAyah();
+    final nextAyah = nextAyahThan(current);
+    saveCurrentAyah(nextAyah);
+  }
+
+  void previousAyahThanCurrent() {
+    final current = currentAyah();
+    final previousAyah = previousAyahThan(current);
+    saveCurrentAyah(previousAyah);
   }
 }

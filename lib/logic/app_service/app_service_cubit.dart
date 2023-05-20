@@ -6,6 +6,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:ayat_notifications/data/local/local.dart';
 import 'package:ayat_notifications/data/models/ayah.dart';
 import 'package:ayat_notifications/main.dart';
+import 'package:ayat_notifications/presentation/settings/settings.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -13,7 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../data/models/bottom_bar_item.dart';
 import '../../data/models/stat_item.dart';
+import '../../presentation/already_read_ayahs/already_read_ayahs.dart';
+import '../../presentation/home/home.dart';
 import '../../utils/notifications.dart';
 import '../../utils/strings.dart';
 import '../ayat_fetcher/ayat_fetcher_cubit.dart';
@@ -26,8 +30,12 @@ class AppServiceCubit extends Cubit<AppServiceState> {
   AppServiceCubit({
     required this.fetcherCubit,
   }) : super(
-          AppServiceInitial(fetcherState: fetcherCubit.state),
+          AppServiceInitial(
+            fetcherState: fetcherCubit.state,
+          ),
         ) {
+    emit(state.copyWith(selectedBottomBarItem: bottomBarItems.first));
+
     NotificationController.setListeners();
     _listenToFetcherCubit();
   }
@@ -114,4 +122,26 @@ class AppServiceCubit extends Cubit<AppServiceState> {
           ),
         ),
       ];
+
+  List<BottomBarItem> get bottomBarItems => [
+        const BottomBarItem(
+          icon: FlutterRemix.home_4_line,
+          selectedIcon: FlutterRemix.home_4_fill,
+          widget: HomeView(),
+        ),
+        const BottomBarItem(
+          icon: FlutterRemix.list_check_2,
+          selectedIcon: FlutterRemix.list_check_2,
+          widget: AlreadyReadedAyahs(),
+        ),
+        const BottomBarItem(
+          icon: FlutterRemix.settings_line,
+          selectedIcon: FlutterRemix.settings_fill,
+          widget: Settings(),
+        ),
+      ];
+
+  void changeHomePage(BottomBarItem item) {
+    emit(state.copyWith(selectedBottomBarItem: item));
+  }
 }
