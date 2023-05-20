@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class StatItem extends Equatable {
   final String title;
   final IconData icon;
-  final Stream valueStream;
+  final Stream<String?> valueStream;
 
   const StatItem({
     required this.title,

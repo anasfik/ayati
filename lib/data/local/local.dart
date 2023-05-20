@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ayat_notifications/data/models/ayah.dart';
 import 'package:ayat_notifications/data/models/quran_response.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -204,13 +206,32 @@ class LocalDatabase implements LocalDatabaseBase {
     return allAyahs.where((ayah) => ayah.number <= current.number).toList();
   }
 
-  Stream<T> valueStream<T, R>({
+  Stream<T?> valueStream<T, R>({
     required String boxName,
     required String key,
     required T Function(R) mapper,
   }) {
-    return Hive.box<R>(boxName).watch(key: key).map((event) {
-      return mapper(event.value as R);
-    });
+    final controller = StreamController<T?>();
+
+    final listenable = Hive.box<R>(boxName).listenable(keys: [key]);
+
+    void onValueTriggered() {
+      final value = Hive.box<R>(boxName).get(key);
+      if (value == null) {
+        controller.add(null);
+      } else {
+        controller.add(mapper(value));
+      }
+    }
+
+    listenable.addListener(onValueTriggered);
+
+    controller.onCancel = () {
+      listenable.removeListener(onValueTriggered);
+    };
+
+    onValueTriggered();
+
+    return controller.stream;
   }
 }

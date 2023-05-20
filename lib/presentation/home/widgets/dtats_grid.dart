@@ -23,9 +23,7 @@ class StatsGrid extends StatelessWidget {
       itemBuilder: (context, index) {
         final current = cubit.statsItems[index];
 
-        return StatBox(
-          statItem: current,
-        );
+        return StatBox(statItem: current);
       },
     );
   }

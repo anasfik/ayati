@@ -17,4 +17,5 @@ abstract class AppStrings {
   static const stats = "Stats";
 
   static const currentAyah = "Current Ayah";
+  static const ayahsProgress = "Ayahs Progress";
 }

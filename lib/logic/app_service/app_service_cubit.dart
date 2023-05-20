@@ -69,11 +69,6 @@ class AppServiceCubit extends Cubit<AppServiceState> {
   }
 
   List<StatItem> get statsItems => [
-        // const StatItem(
-        //   title: AppStrings.currentAyah,
-        //   icon: FlutterRemix.account_box_line,
-        //   valueStream: Stream.empty(),
-        // ),
         StatItem(
           title: AppStrings.currentAyah,
           icon: FlutterIslamicIcons.quran,
@@ -85,15 +80,16 @@ class AppServiceCubit extends Cubit<AppServiceState> {
             },
           ),
         ),
-        // const StatItem(
-        //   title: AppStrings.ayats,
-        //   icon: FlutterRemix.account_box_line,
-        //   valueStream: Stream.empty(),
-        // ),
-        // const StatItem(
-        //   title: AppStrings.ayats,
-        //   icon: FlutterRemix.account_box_line,
-        //   valueStream: Stream.empty(),
-        // ),
+        StatItem(
+          title: AppStrings.ayahsProgress,
+          icon: FlutterIslamicIcons.mosque,
+          valueStream: LocalDatabase.instance.valueStream<String, Ayah>(
+            boxName: LocalDatabase.instance.ayatBoxName,
+            key: 'currentAyah',
+            mapper: (ayah) {
+              return ayah.number.toString() + ' / ' + "6236";
+            },
+          ),
+        ),
       ];
 }
