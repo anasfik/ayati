@@ -2,7 +2,7 @@ import 'package:ayat_notifications/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/cubit/settings_cubit.dart';
+import '../../logic/settings/settings_cubit.dart';
 import '../../utils/routing_handler.dart';
 import '../general/section_title.dart';
 

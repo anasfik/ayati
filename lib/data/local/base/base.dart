@@ -1,5 +1,6 @@
 import 'package:ayat_notifications/data/models/quran_response.dart';
 
+import '../../models/ayah.dart';
 import '../../models/surah.dart';
 
 abstract class LocalDatabaseBase {
@@ -16,4 +17,5 @@ abstract class LocalDatabaseBase {
   Future<void> clear();
   Future<void> dispose();
   Future<void> saveQuranResponse(QuranResponse quranResponse);
+  List<Ayah> ayahsBeforeCurrentOne();
 }

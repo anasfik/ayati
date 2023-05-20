@@ -7,15 +7,22 @@ import '../models/surah.dart';
 import '../models/type.dart';
 import 'base/base.dart';
 
+/// {@template local_database}
+/// Manages local database operations for ayahs and surahs
+/// {@endtemplate}
 class LocalDatabase implements LocalDatabaseBase {
+  /// {@macro local_database}
   static LocalDatabase get instance => _instance;
 
+  /// The name of the box that contains the ayahs
   @override
   String get ayatBoxName => 'ayats';
 
+  /// The name of the box that contains the surahs
   @override
   String get surahBoxName => "surahs";
 
+  /// Clears the database box that contains the ayahs and surahs, after calling this expect the database to be empty.
   @override
   Future<void> clear() async {
     await Future.wait([
@@ -24,16 +31,19 @@ class LocalDatabase implements LocalDatabaseBase {
     ]);
   }
 
+  /// Deletes value associated with the given [key] from the database box that contains the ayahs and surahs.
   @override
   Future<void> delete(String key) {
     return Hive.box(surahBoxName).delete(key);
   }
 
+  /// Closes and ends the local database service.
   @override
   Future<void> dispose() {
     return Hive.close();
   }
 
+  /// Returns the ayah associated with the given [key] from the database box that contains the ayahs and surahs.
   @override
   dynamic get(String key) {
     final box = Hive.box<Surah>(surahBoxName);
@@ -41,6 +51,7 @@ class LocalDatabase implements LocalDatabaseBase {
     return box.get(key);
   }
 
+  /// Initializes the local database service.
   @override
   Future<void> init({
     required bool clearOn,
@@ -60,51 +71,73 @@ class LocalDatabase implements LocalDatabaseBase {
     }
   }
 
+  /// Saves the given [value] associated with the given [key] to the database box that contains surahs.
   @override
   Future<void> save(String key, Surah value) async {
     final box = Hive.box<Surah>(surahBoxName);
     await box.add(value);
   }
 
+  /// Saves a list of surahs to the database box that contains surahs from the given [quranResponse].
   @override
   Future<void> saveQuranResponse(QuranResponse quranResponse) async {
     for (int i = 0; i < quranResponse.data.surahs.length; i++) {
-      final currentSurahs = quranResponse.data.surahs[i];
-      await saveSurah(currentSurahs.englishName, currentSurahs);
+      Surah currentSurah = quranResponse.data.surahs[i];
+      List<Ayah> currentSurahAyasReferecesTHeSUrahItSelf =
+          currentSurah.ayahs.map((item) {
+        return item.copyWith(
+          surah: currentSurah,
+        );
+      }).toList();
+
+      currentSurah = currentSurah.copyWith(
+        ayahs: currentSurahAyasReferecesTHeSUrahItSelf,
+      );
+
+      await saveSurah(currentSurah.englishName, currentSurah);
     }
   }
 
+  /// Saves the given [value] associated with the given [key] to the database.
   @override
   Future<void> saveSurah(String key, Surah value) {
     return save(key, value);
   }
 
+  /// {@macro local_database}
   static final _instance = LocalDatabase._();
+
+  /// {@macro local_database}
+  /// {@macro local_database}
   LocalDatabase._();
 
+  /// Weither the surahs are already saved in the database or not.
   bool isSurahsAlreadySaved() {
     final box = Hive.box<Surah>(surahBoxName);
 
     return box.isNotEmpty;
   }
 
+  /// Saves the given [ayah] to the database box that contains ayahs.
   Future<void> saveCurrentAyah(Ayah ayah) async {
     final box = Hive.box<Ayah>(ayatBoxName);
 
     await box.put('currentAyah', ayah);
   }
 
-  Future<Ayah> currentAyah() async {
+  /// Returns the current ayah from the database box that contains ayahs.
+  Ayah currentAyah() {
     final box = Hive.box<Ayah>(ayatBoxName);
     if (box.get('currentAyah') == null) {
       final firstSurah = Hive.box<Surah>(surahBoxName).values.first;
       final firstAyah = firstSurah.ayahs.first;
-      await saveCurrentAyah(firstAyah);
+      saveCurrentAyah(firstAyah);
     }
 
     return box.get('currentAyah')!;
   }
 
+  /// Takes an [ayah] and returns it's next ayah.
   Ayah nextAyahThan(Ayah currentAyah) {
     final currentAyahNumber = currentAyah.number;
     final surah = _searchForSurahWithAyahNumber(currentAyah);
@@ -120,10 +153,11 @@ class LocalDatabase implements LocalDatabaseBase {
     }
   }
 
+  /// Returns a [Surah] with the given [ayah] number.
   Surah _searchForSurahWithAyahNumber(Ayah ayah) {
     final surahs = Hive.box<Surah>(surahBoxName).values;
     for (final surah in surahs) {
-      if (surah.ayahs.contains(ayah)) {
+      if (surah.ayahs.any((element) => element.number == ayah.number)) {
         return surah;
       }
     }
@@ -131,6 +165,7 @@ class LocalDatabase implements LocalDatabaseBase {
     throw Exception('Surah not found for ayah number ${ayah.number}');
   }
 
+  /// Returns an [Ayah] with the given [ayahNumber] from the given [surah].
   Ayah? _getAyahFromSurah(
     Surah surah,
     int ayahNumber,
@@ -144,6 +179,7 @@ class LocalDatabase implements LocalDatabaseBase {
     return null;
   }
 
+  /// Returns the next [Surah] after the given [surah].
   Surah _getNextSurah(Surah surah) {
     final surahs = Hive.box<Surah>(surahBoxName).values;
     final surahsList = surahs.toList();
@@ -154,5 +190,17 @@ class LocalDatabase implements LocalDatabaseBase {
     } else {
       throw Exception('No next surah found');
     }
+  }
+
+  @override
+  List<Ayah> ayahsBeforeCurrentOne() {
+    final current = currentAyah();
+    final allAyahs = Hive.box<Surah>(surahBoxName)
+        .values
+        .map((surah) => surah.ayahs)
+        .expand((ayahs) => ayahs)
+        .toList();
+
+    return allAyahs.where((ayah) => ayah.number <= current.number).toList();
   }
 }

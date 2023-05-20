@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
@@ -21,7 +24,7 @@ class Surah extends Equatable {
   @HiveField(5)
   final List<Ayah> ayahs;
 
-  Surah({
+  const Surah({
     required this.number,
     required this.name,
     required this.englishName,
@@ -39,15 +42,6 @@ class Surah extends Equatable {
         ayahs: List<Ayah>.from(json["ayahs"].map((x) => Ayah.fromMap(x))),
       );
 
-  Map<String, dynamic> toMap() => {
-        "number": number,
-        "name": name,
-        "englishName": englishName,
-        "englishNameTranslation": englishNameTranslation,
-        "revelationType": revelationTypeValues.reverse[revelationType],
-        "ayahs": List<dynamic>.from(ayahs.map((x) => x.toMap())),
-      };
-
   @override
   List<Object?> get props => [
         number,
@@ -57,4 +51,39 @@ class Surah extends Equatable {
         revelationType,
         ayahs,
       ];
+
+  Surah copyWith({
+    int? number,
+    String? name,
+    String? englishName,
+    String? englishNameTranslation,
+    RevelationType? revelationType,
+    List<Ayah>? ayahs,
+  }) {
+    return Surah(
+      number: number ?? this.number,
+      name: name ?? this.name,
+      englishName: englishName ?? this.englishName,
+      englishNameTranslation:
+          englishNameTranslation ?? this.englishNameTranslation,
+      revelationType: revelationType ?? this.revelationType,
+      ayahs: ayahs ?? this.ayahs,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'number': number,
+      'name': name,
+      'englishName': englishName,
+      'englishNameTranslation': englishNameTranslation,
+      'revelationType': revelationTypeValues.reverse[revelationType]!,
+      'ayahs': ayahs.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Surah.fromJson(String source) =>
+      Surah.fromMap(json.decode(source) as Map<String, dynamic>);
 }
