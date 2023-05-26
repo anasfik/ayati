@@ -44,15 +44,17 @@ class MainApp extends StatelessWidget {
             create: (context) =>
                 AppServiceCubit(fetcherCubit: context.read<AyatFetcherCubit>()),
             child: ShowCaseWidget(
-              builder: Builder(builder: (context) {
-                return MaterialApp(
-                  navigatorKey: navigatorKey,
-                  onGenerateRoute: NotificationController.onGenerateRoute,
-                  theme: ThemesHandler.light,
-                  routes: RoutingHandler.all,
-                  initialRoute: RoutingPaths.initial,
-                );
-              }),
+              builder: Builder(
+                builder: (context) {
+                  return MaterialApp(
+                    navigatorKey: navigatorKey,
+                    onGenerateRoute: NotificationController.onGenerateRoute,
+                    theme: ThemesHandler.light,
+                    routes: RoutingHandler.all,
+                    initialRoute: RoutingPaths.initial,
+                  );
+                },
+              ),
             ),
           );
         },

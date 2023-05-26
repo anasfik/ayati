@@ -31,6 +31,7 @@ class CustomShowcase extends StatelessWidget {
       // disableMovingAnimation: true,
       disableScaleAnimation: true,
       targetBorderRadius: borderRadius,
+      targetPadding: const EdgeInsets.all(4),
       tooltipBackgroundColor: Theme.of(context).inputDecorationTheme.fillColor!,
       blurValue: 4,
       tooltipPadding: const EdgeInsets.all(15),
