@@ -38,4 +38,7 @@ abstract class AppStrings {
       "This section is where you can track your progress over time.";
 
   static const String statsSectionTitle = "Statistics";
+
+  static const String ayahsSliderDescription = "";
+  static const String ayahsSliderTitle = "";
 }

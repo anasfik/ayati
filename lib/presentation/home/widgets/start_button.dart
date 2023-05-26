@@ -18,6 +18,7 @@ class StartButton extends StatelessWidget {
         Future.delayed(showcaseDelayDuration, () {
           Showcaser.startShawCase(context, <GlobalKey>[
             Showcaser.statsSectionKey,
+            Showcaser.ayahsSliderKey,
           ]);
         });
       },

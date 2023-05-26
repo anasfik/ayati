@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../../utils/showcase.dart';
 import '../../utils/strings.dart';
 
 class CustomShowcase extends StatelessWidget {
@@ -10,12 +13,14 @@ class CustomShowcase extends StatelessWidget {
     required this.child,
     required this.description,
     required this.title,
+    this.borderRadius = const BorderRadius.all(Radius.circular(50)),
   });
 
   final GlobalKey showcaseKey;
   final Widget child;
   final String title;
   final String description;
+  final BorderRadius borderRadius;
   @override
   Widget build(BuildContext context) {
     return Showcase(
@@ -25,7 +30,7 @@ class CustomShowcase extends StatelessWidget {
       description: description,
       // disableMovingAnimation: true,
       disableScaleAnimation: true,
-      targetBorderRadius: const BorderRadius.all(Radius.circular(50)),
+      targetBorderRadius: borderRadius,
       tooltipBackgroundColor: Theme.of(context).inputDecorationTheme.fillColor!,
       blurValue: 4,
       tooltipPadding: const EdgeInsets.all(15),

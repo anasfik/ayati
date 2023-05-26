@@ -18,6 +18,7 @@ class StatsGrid extends StatelessWidget {
       showcaseKey: Showcaser.statsSectionKey,
       description: AppStrings.statsSectionDescription,
       title: AppStrings.statsSectionTitle,
+      borderRadius: BorderRadius.circular(15),
       child: GridView.builder(
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -30,7 +31,9 @@ class StatsGrid extends StatelessWidget {
         itemBuilder: (context, index) {
           final current = cubit.statsItems[index];
 
-          return StatBox(statItem: current);
+          return StatBox(
+            statItem: current,
+          );
         },
       ),
     );
