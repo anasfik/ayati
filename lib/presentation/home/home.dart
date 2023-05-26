@@ -1,6 +1,7 @@
 import 'package:ayat_notifications/presentation/home/widgets/dtats_grid.dart';
 import 'package:ayat_notifications/utils/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../general/margined_body.dart';
@@ -27,18 +28,27 @@ class HomeView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
-              SizedBox(height: height * 2),
-              TodoBox(),
-              SizedBox(height: height * 2),
-              HomeTitle(title: AppStrings.stats),
-              SizedBox(height: height),
-              StatsGrid(),
-              SizedBox(height: height * 2),
-              HomeTitle(title: AppStrings.continueReading),
-              CurrentAyahBox(),
-              SizedBox(height: height * 4),
-            ],
+            children: AnimateList(
+              interval: 150.ms,
+              effects: const <Effect>[
+                FadeEffect(),
+                // SlideEffect(
+                //   begin: Offset(0, 0.5),
+                // ),
+              ],
+              children: const <Widget>[
+                SizedBox(height: height * 2),
+                TodoBox(),
+                SizedBox(height: height * 2),
+                HomeTitle(title: AppStrings.stats),
+                SizedBox(height: height),
+                StatsGrid(),
+                SizedBox(height: height * 2),
+                HomeTitle(title: AppStrings.continueReading),
+                CurrentAyahBox(),
+                SizedBox(height: height * 4),
+              ],
+            ),
           ),
         ),
       ),

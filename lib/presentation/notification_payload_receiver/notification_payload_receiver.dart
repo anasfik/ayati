@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/ayah.dart';
 import '../../utils/notifications.dart';
+import '../home/current_ayah_box.dart';
+import '../home/current_ayah_box_contents.dart';
 
 class NotificationPayloadReceiver extends StatelessWidget {
   const NotificationPayloadReceiver({
@@ -18,11 +20,14 @@ class NotificationPayloadReceiver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
-
     final currentAyah = Ayah.fromMap(
       jsonDecode(
         receivedAction.payload!["currentAyah"]!,
       ),
+    );
+
+    return const Scaffold(
+      body: Center(child: CurrentAyahBox()),
     );
 
     return Scaffold(

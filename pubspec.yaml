@@ -1,16 +1,18 @@
 name: ayat_notifications
 description: A new Flutter project.
 publish_to: "none"
-version: 0.8.0+2
+version: 0.97.0+4
 
 environment:
   sdk: ">=2.19.6 <3.0.0"
 
 dependencies:
+  auto_size_text: ^3.0.0
   awesome_notifications: ^0.7.4+1
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_animate: ^4.1.1+1
   flutter_bloc: ^8.1.2
   flutter_islamic_icons: ^1.0.2
   flutter_remix: ^0.0.3
@@ -18,6 +20,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   http: ^0.13.5
+  showcaseview: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,11 @@
 import 'package:ayat_notifications/logic/app_service/app_service_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:showcaseview/showcaseview.dart';
 
+import '../../utils/showcase.dart';
+import '../../utils/strings.dart';
+import '../general/custom_showcase.dart';
 import 'error.dart';
 import 'load_button.dart';
 import 'widgets/start_button.dart';
@@ -24,11 +28,36 @@ class MainServiceSection extends StatelessWidget {
             ),
           );
         } else if (state.fetcherState.areAyahsSavedForLaterUse) {
-          return const StartButton();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Showcaser.startShawCase(context, [Showcaser.startButtonKey]);
+          });
+
+          return CustomShowcase(
+            showcaseKey: Showcaser.startButtonKey,
+            description: AppStrings.startServiceDescription,
+            title: AppStrings.startServiceTitle,
+            child: const SizedBox(
+              width: 110,
+              height: 35,
+              child: StartButton(),
+            ),
+          );
         } else if (state.fetcherState.error != null) {
           return const ErrorDuringFetch();
         } else {
-          return const LoadAyahsButton();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Showcaser.startShawCase(context, [Showcaser.loadButtonKey]);
+          });
+          return CustomShowcase(
+            description: AppStrings.loadDataDescription,
+            title: AppStrings.loadData,
+            showcaseKey: Showcaser.loadButtonKey,
+            child: const SizedBox(
+              width: 110,
+              height: 35,
+              child: LoadAyahsButton(),
+            ),
+          );
         }
       },
     );

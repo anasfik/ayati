@@ -58,7 +58,7 @@ class NotificationController {
         actionType: ActionType.KeepOnTop,
         autoDismissible: false,
         category: NotificationCategory.LocalSharing,
-        displayOnBackground: true,
+        displayOnBackground: false,
         displayOnForeground: true,
         locked: true,
         payload: {
@@ -66,7 +66,7 @@ class NotificationController {
         },
         backgroundColor: Colors.green.shade100,
         badge: ayah.numberInSurah,
-        fullScreenIntent: true,
+        fullScreenIntent: false,
       ),
       actionButtons: <NotificationActionButton>[
         NotificationActionButton(

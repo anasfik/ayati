@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../../data/models/stat_item.dart';
 import '../../../utils/colors.dart';
 import '../../general/margined_body.dart';
@@ -52,16 +52,25 @@ class StatBox extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            StreamBuilder<String?>(
-              stream: statItem.valueStream,
-              builder: (context, state) {
-                return Text(
-                  state.data == null ? '---' : state.data.toString(),
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppColors.darkGrey,
-                      ),
-                );
-              },
+            Center(
+              child: StreamBuilder<String?>(
+                stream: statItem.valueStream,
+                builder: (context, state) {
+                  return AnimatedSwitcher(
+                    duration: Animate.defaultDuration,
+                    child: AutoSizeText(
+                      state.data == null ? '---' : state.data.toString(),
+                      key: ValueKey(state.data),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: AppColors.darkGrey,
+                          ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                },
+              ),
             ),
             const Spacer(flex: 2),
           ],

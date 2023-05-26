@@ -1,5 +1,6 @@
 import 'package:ayat_notifications/presentation/general/button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../data/local/local.dart';
 
@@ -14,23 +15,27 @@ class CurrentAyahBoxContents extends StatelessWidget {
         final surahNameText = Text(
           state.data == null
               ? "---"
-              : "${state.data!.surah!.name} - ${state.data!.surah!.number}",
+              : "${state.data!.surah!.name} - ${state.data!.numberInSurah}",
           textAlign: TextAlign.center,
           textDirection: Directionality.of(context),
         );
 
         return Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: heightOfTextWidget(surahNameText)),
-              Text(
-                state.data == null ? "---" : state.data!.text,
-                textAlign: TextAlign.center,
-              ),
-              surahNameText,
-            ],
+          child: AnimatedSwitcher(
+            duration: Animate.defaultDuration,
+            child: Column(
+              key: ValueKey(state.data),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: heightOfTextWidget(surahNameText)),
+                Text(
+                  state.data == null ? "---" : state.data!.text,
+                  textAlign: TextAlign.center,
+                ),
+                surahNameText,
+              ],
+            ),
           ),
         );
       },

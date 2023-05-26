@@ -1,9 +1,11 @@
 import 'package:ayat_notifications/data/local/local.dart';
 import 'package:ayat_notifications/presentation/home/slide_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../utils/colors.dart';
+import '../../utils/notifications.dart';
 import 'current_ayah_box_contents.dart';
 
 class CurrentAyahBox extends StatelessWidget {
@@ -28,18 +30,27 @@ class CurrentAyahBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SlideNavigationIconButton(
-            icon: FlutterRemix.arrow_left_s_line,
-            onPressed: () {
-              LocalDatabase.instance.previousAyahThanCurrent();
-            },
+          AnimatedSwitcher(
+            duration: Animate.defaultDuration,
+            child: SlideNavigationIconButton(
+              icon: FlutterRemix.arrow_left_s_line,
+              onPressed: () {
+                final previousAyah =
+                    LocalDatabase.instance.previousAyahThanCurrent();
+                NotificationController.createAyahNotification(previousAyah);
+              },
+            ),
           ),
           const CurrentAyahBoxContents(),
-          SlideNavigationIconButton(
-            icon: FlutterRemix.arrow_right_s_line,
-            onPressed: () {
-              LocalDatabase.instance.nextAyahThanCurrent();
-            },
+          AnimatedSwitcher(
+            duration: Animate.defaultDuration,
+            child: SlideNavigationIconButton(
+              icon: FlutterRemix.arrow_right_s_line,
+              onPressed: () {
+                final nextAyah = LocalDatabase.instance.nextAyahThanCurrent();
+                NotificationController.createAyahNotification(nextAyah);
+              },
+            ),
           ),
         ],
       ),

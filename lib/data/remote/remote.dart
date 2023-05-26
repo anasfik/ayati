@@ -1,4 +1,3 @@
-import 'package:ayat_notifications/data/local/local.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../utils/exeptions.dart';
@@ -25,14 +24,15 @@ class RemoteSource implements RemoteSourceBase {
         headers: {
           'Connection': 'keep-alive',
           'Accept': 'application/json',
-          'Keep-Alive': 'timeout=5, max=1000'
+          'Keep-Alive': 'timeout=10, max=100000'
         },
       );
       if (response.isOk) {
         return quranResponseFromMap(response.body);
       } else {
         throw FetchException(
-            "Error while fetching data: ${response.statusCode}");
+          "Error while fetching data: ${response.statusCode}",
+        );
       }
     } catch (e) {
       throw FetchException("${e.runtimeType}: ${e.toString()}");

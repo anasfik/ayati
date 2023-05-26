@@ -33,7 +33,7 @@ class AlreadyReadedAyahsCubit extends Cubit<AlreadyReadedAyahsState> {
 
   void executeSearch() {
     final controller = searchController;
-    if (controller == null) {
+    if (controller == null || controller.text.isEmpty) {
       return;
     }
 

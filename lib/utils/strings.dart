@@ -27,4 +27,10 @@ abstract class AppStrings {
   static const String continueReading = "Continue Reading";
   static const String alreadyReadedAyahs = "Succesfully ayahs\nReads";
   static const String typeHere = "Type here...";
+  static const String loadDataDescription =
+      "For the very first app use, you will need to load the data from the internet that it will be used for the app serv;ce to work.";
+  static const String loadData = "Load Data";
+  static const String startServiceDescription =
+      "For start showing the notifications, you will need to start the service.";
+  static const String startServiceTitle = "Start Service";
 }

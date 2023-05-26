@@ -271,15 +271,17 @@ class LocalDatabase implements LocalDatabaseBase {
     );
   }
 
-  void nextAyahThanCurrent() {
+  Ayah nextAyahThanCurrent() {
     final current = currentAyah();
     final nextAyah = nextAyahThan(current);
     saveCurrentAyah(nextAyah);
+    return nextAyah;
   }
 
-  void previousAyahThanCurrent() {
+  Ayah previousAyahThanCurrent() {
     final current = currentAyah();
     final previousAyah = previousAyahThan(current);
     saveCurrentAyah(previousAyah);
+    return previousAyah;
   }
 }
