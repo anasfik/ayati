@@ -44,12 +44,6 @@ class MainApp extends StatelessWidget {
             create: (context) =>
                 AppServiceCubit(fetcherCubit: context.read<AyatFetcherCubit>()),
             child: ShowCaseWidget(
-              onStart: (index, key) {
-                print('onStart: $index, $key');
-              },
-              onComplete: (index, key) {
-                print('onComplete: $index, $key');
-              },
               builder: Builder(builder: (context) {
                 return MaterialApp(
                   navigatorKey: navigatorKey,

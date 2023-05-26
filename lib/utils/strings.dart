@@ -33,4 +33,9 @@ abstract class AppStrings {
   static const String startServiceDescription =
       "For start showing the notifications, you will need to start the service.";
   static const String startServiceTitle = "Start Service";
+
+  static const String statsSectionDescription =
+      "This section is where you can track your progress over time.";
+
+  static const String statsSectionTitle = "Statistics";
 }

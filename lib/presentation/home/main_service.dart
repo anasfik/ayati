@@ -28,8 +28,12 @@ class MainServiceSection extends StatelessWidget {
             ),
           );
         } else if (state.fetcherState.areAyahsSavedForLaterUse) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Showcaser.startShawCase(context, [Showcaser.startButtonKey]);
+          const showcaseDelayDuration = Showcaser.showCaseDelayDuration;
+
+          Future.delayed(showcaseDelayDuration, () {
+            Showcaser.startShawCase(context, <GlobalKey>[
+              Showcaser.startButtonKey,
+            ]);
           });
 
           return CustomShowcase(
@@ -45,9 +49,14 @@ class MainServiceSection extends StatelessWidget {
         } else if (state.fetcherState.error != null) {
           return const ErrorDuringFetch();
         } else {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Showcaser.startShawCase(context, [Showcaser.loadButtonKey]);
+          const showcaseDelayDuration = Showcaser.showCaseDelayDuration;
+
+          Future.delayed(showcaseDelayDuration, () {
+            Showcaser.startShawCase(context, <GlobalKey>[
+              Showcaser.loadButtonKey,
+            ]);
           });
+
           return CustomShowcase(
             description: AppStrings.loadDataDescription,
             title: AppStrings.loadData,
