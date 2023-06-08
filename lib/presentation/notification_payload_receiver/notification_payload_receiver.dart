@@ -1,14 +1,12 @@
 import 'dart:convert';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:ayat_notifications/logic/app_service/app_service_cubit.dart';
 import 'package:ayat_notifications/presentation/general/button.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/ayah.dart';
 import '../../utils/notifications.dart';
 import '../home/current_ayah_box.dart';
-import '../home/current_ayah_box_contents.dart';
 
 class NotificationPayloadReceiver extends StatelessWidget {
   const NotificationPayloadReceiver({

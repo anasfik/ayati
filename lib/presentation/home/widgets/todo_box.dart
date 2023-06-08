@@ -1,7 +1,6 @@
 import 'package:ayat_notifications/logic/app_service/app_service_cubit.dart';
 import 'package:ayat_notifications/utils/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TodoBox extends StatelessWidget {

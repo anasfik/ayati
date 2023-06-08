@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:ayat_notifications/data/models/ayah.dart';
 import 'package:ayat_notifications/data/models/quran_response.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:http/http.dart';
 
 import '../models/surah.dart';
 import '../models/type.dart';

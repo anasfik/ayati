@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../presentation/app/app.dart';
-import '../presentation/home/home.dart';
-import '../presentation/notification_payload_receiver/notification_payload_receiver.dart';
 import '../presentation/privacy/privacy.dart';
 
 abstract class RoutingHandler {

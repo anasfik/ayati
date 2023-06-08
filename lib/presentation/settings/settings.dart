@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../logic/settings/settings_cubit.dart';
 import '../../utils/routing_handler.dart';
 import '../general/screen_title.dart';
-import '../general/section_title.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});

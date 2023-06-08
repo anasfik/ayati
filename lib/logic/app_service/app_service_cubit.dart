@@ -1,16 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:ui';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:ayat_notifications/data/local/local.dart';
 import 'package:ayat_notifications/data/models/ayah.dart';
-import 'package:ayat_notifications/main.dart';
 import 'package:ayat_notifications/presentation/settings/settings.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -58,7 +53,7 @@ class AppServiceCubit extends Cubit<AppServiceState> {
       }
     }
 
-    final currentAyah = await LocalDatabase.instance.currentAyah();
+    final currentAyah = LocalDatabase.instance.currentAyah();
     await createAyahNotification(currentAyah);
   }
 

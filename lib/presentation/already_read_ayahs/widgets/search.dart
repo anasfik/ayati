@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../logic/already_read/already_readed_ayahs_cubit.dart';
-import '../../../utils/colors.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({super.key});

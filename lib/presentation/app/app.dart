@@ -1,12 +1,9 @@
 import 'package:ayat_notifications/data/models/bottom_bar_item.dart';
 import 'package:ayat_notifications/logic/app_service/app_service_cubit.dart';
 import 'package:ayat_notifications/logic/ayat_fetcher/ayat_fetcher_cubit.dart';
-import 'package:ayat_notifications/presentation/home/widgets/dtats_grid.dart';
-import 'package:ayat_notifications/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../general/margined_body.dart';
 import 'widgets/bottom_app_bar.dart';
 
 class AppView extends StatelessWidget {

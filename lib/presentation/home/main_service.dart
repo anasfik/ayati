@@ -1,7 +1,6 @@
 import 'package:ayat_notifications/logic/app_service/app_service_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 import '../../utils/showcase.dart';
 import '../../utils/strings.dart';

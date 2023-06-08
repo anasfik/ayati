@@ -1,7 +1,6 @@
 import 'package:ayat_notifications/utils/enum.dart';
 import 'package:flutter/material.dart';
 
-import '../../already_read_ayahs/already_read_ayahs.dart';
 import '../../general/logo.dart';
 import '../main_service.dart';
 

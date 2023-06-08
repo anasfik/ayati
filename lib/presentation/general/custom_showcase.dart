@@ -1,10 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
-
-import '../../utils/showcase.dart';
-import '../../utils/strings.dart';
 
 class CustomShowcase extends StatelessWidget {
   const CustomShowcase({

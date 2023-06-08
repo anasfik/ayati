@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 enum AyatiLogoType {
   transparent(path: "assets/images/icon_no_bg.png"),
